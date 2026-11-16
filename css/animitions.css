@@ -1,0 +1,301 @@
+/* =========================================================
+   ODDAWURLD — Animations
+   Keyframes, scroll reveals, entrance effects and micro-interactions
+   ========================================================= */
+
+/* ---------- Keyframes ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+}
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+}
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes drawLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  65% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes addedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(198, 244, 81, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(198, 244, 81, 0);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.45);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes swapIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 244, 81, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px 0 rgba(198, 244, 81, 0.35);
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal,
+.stagger > * {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.reveal.in,
+.stagger > .in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Page entrance (runs once loader hides) ---------- */
+.enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+body.loaded .enter {
+  animation: fadeUp 1s var(--d, 0s) var(--ease) both;
+}
+/* keep the parallax transform on the hero visual after entrance */
+body.loaded .hero-visual.enter {
+  animation: fadeIn 1.1s var(--d, 0s) var(--ease) both;
+  transform: translate3d(
+    calc(var(--hx, 0) * -18px),
+    calc(var(--py, 0px) + var(--hy, 0) * -18px),
+    0
+  );
+}
+.hero-visual.enter {
+  transform: none;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Tilt cards ---------- */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- Magnetic buttons ---------- */
+.magnetic {
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s,
+    background 0.35s,
+    color 0.35s;
+  will-change: transform;
+}
+
+/* ---------- Badges & counters ---------- */
+.bump {
+  animation: bump 0.5s var(--ease);
+}
+.pop-in {
+  animation: popIn 0.6s var(--ease) both;
+}
+.added {
+  animation: addedPulse 0.9s var(--ease);
+}
+.spark {
+  display: inline-block;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.success-check {
+  animation: popIn 0.7s 0.1s var(--ease) both;
+}
+
+/* ---------- Gallery swap ---------- */
+.gallery-frame.swap img,
+.view-angle.swap {
+  animation: swapIn 0.5s var(--ease);
+}
+
+/* ---------- Toasts ---------- */
+.odda-toast {
+  transform: translateX(120%);
+  opacity: 0;
+  transition:
+    transform 0.55s var(--ease),
+    opacity 0.55s var(--ease);
+}
+.odda-toast.show {
+  transform: none;
+  opacity: 1;
+}
+
+/* ---------- Carousel progress ---------- */
+.carousel-progress span,
+.carousel-progress i {
+  transform-origin: left;
+}
+
+/* ---------- Skeleton shimmer helper ---------- */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 247, 242, 0.04) 25%,
+    rgba(198, 244, 81, 0.08) 50%,
+    rgba(245, 247, 242, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ---------- Hover lift utility ---------- */
+.lift {
+  transition:
+    transform 0.45s var(--ease),
+    box-shadow 0.45s var(--ease);
+}
+.lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--glow-soft);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .stagger > *,
+  .enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
